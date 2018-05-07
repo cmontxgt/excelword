@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="swx.excel.dao.lxt.OldLBPZB_MBMOldapper">
+  <resultMap id="BaseResultMap" type="swx.excel.domain.LBPZB_MB">
+    <id column="PCLB_BM" jdbcType="CHAR" property="pclbBm" />
+    <result column="PCLB_ZMC" jdbcType="VARCHAR" property="pclbZmc" />
+    <result column="PCLB_CMC" jdbcType="VARCHAR" property="pclbCmc" />
+    <result column="SFQY" jdbcType="CHAR" property="sfqy" />
+    <result column="CJSJ" jdbcType="TIMESTAMP" property="cjsj" />
+    <result column="PCLB_BZ" jdbcType="VARCHAR" property="pclbBz" />
+    <result column="SX" jdbcType="DECIMAL" property="sx" />
+    <result column="DWBM" jdbcType="CHAR" property="dwbm" />
+    <result column="PC_FLBM" jdbcType="CHAR" property="pcFlbm" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="swx.excel.domain.LBPZB_MB">
+    <result column="PCLBMB" jdbcType="BLOB" property="pclbmb" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PCLB_BM, PCLB_ZMC, PCLB_CMC, SFQY, CJSJ, PCLB_BZ, SX, DWBM, PC_FLBM
+  </sql>
+  <sql id="Blob_Column_List">
+    PCLBMB
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="swx.excel.domain.LBPZB_MBExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from XT_PC_LBPZB_MB
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="swx.excel.domain.LBPZB_MBExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from XT_PC_LBPZB_MB
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from XT_PC_LBPZB_MB
+    where PCLB_BM = #{pclbBm,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from XT_PC_LBPZB_MB
+    where PCLB_BM = #{pclbBm,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="swx.excel.domain.LBPZB_MBExample">
+    delete from XT_PC_LBPZB_MB
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="swx.excel.domain.LBPZB_MB">
+    insert into XT_PC_LBPZB_MB (PCLB_BM, PCLB_ZMC, PCLB_CMC, 
+      SFQY, CJSJ, PCLB_BZ, 
+      SX, DWBM, PC_FLBM, PCLBMB
+      )
+    values (#{pclbBm,jdbcType=CHAR}, #{pclbZmc,jdbcType=VARCHAR}, #{pclbCmc,jdbcType=VARCHAR}, 
+      #{sfqy,jdbcType=CHAR}, #{cjsj,jdbcType=TIMESTAMP}, #{pclbBz,jdbcType=VARCHAR}, 
+      #{sx,jdbcType=DECIMAL}, #{dwbm,jdbcType=CHAR}, #{pcFlbm,jdbcType=CHAR}, #{pclbmb,jdbcType=BLOB}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="swx.excel.domain.LBPZB_MB">
+    insert into XT_PC_LBPZB_MB
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pclbBm != null">
+        PCLB_BM,
+      </if>
+      <if test="pclbZmc != null">
+        PCLB_ZMC,
+      </if>
+      <if test="pclbCmc != null">
+        PCLB_CMC,
+      </if>
+      <if test="sfqy != null">
+        SFQY,
+      </if>
+      <if test="cjsj != null">
+        CJSJ,
+      </if>
+      <if test="pclbBz != null">
+        PCLB_BZ,
+      </if>
+      <if test="sx != null">
+        SX,
+      </if>
+      <if test="dwbm != null">
+        DWBM,
+      </if>
+      <if test="pcFlbm != null">
+        PC_FLBM,
+      </if>
+      <if test="pclbmb != null">
+        PCLBMB,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pclbBm != null">
+        #{pclbBm,jdbcType=CHAR},
+      </if>
+      <if test="pclbZmc != null">
+        #{pclbZmc,jdbcType=VARCHAR},
+      </if>
+      <if test="pclbCmc != null">
+        #{pclbCmc,jdbcType=VARCHAR},
+      </if>
+      <if test="sfqy != null">
+        #{sfqy,jdbcType=CHAR},
+      </if>
+      <if test="cjsj != null">
+        #{cjsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pclbBz != null">
+        #{pclbBz,jdbcType=VARCHAR},
+      </if>
+      <if test="sx != null">
+        #{sx,jdbcType=DECIMAL},
+      </if>
+      <if test="dwbm != null">
+        #{dwbm,jdbcType=CHAR},
+      </if>
+      <if test="pcFlbm != null">
+        #{pcFlbm,jdbcType=CHAR},
+      </if>
+      <if test="pclbmb != null">
+        #{pclbmb,jdbcType=BLOB},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="swx.excel.domain.LBPZB_MBExample" resultType="java.lang.Long">
+    select count(*) from XT_PC_LBPZB_MB
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update XT_PC_LBPZB_MB
+    <set>
+      <if test="record.pclbBm != null">
+        PCLB_BM = #{record.pclbBm,jdbcType=CHAR},
+      </if>
+      <if test="record.pclbZmc != null">
+        PCLB_ZMC = #{record.pclbZmc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pclbCmc != null">
+        PCLB_CMC = #{record.pclbCmc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sfqy != null">
+        SFQY = #{record.sfqy,jdbcType=CHAR},
+      </if>
+      <if test="record.cjsj != null">
+        CJSJ = #{record.cjsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.pclbBz != null">
+        PCLB_BZ = #{record.pclbBz,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sx != null">
+        SX = #{record.sx,jdbcType=DECIMAL},
+      </if>
+      <if test="record.dwbm != null">
+        DWBM = #{record.dwbm,jdbcType=CHAR},
+      </if>
+      <if test="record.pcFlbm != null">
+        PC_FLBM = #{record.pcFlbm,jdbcType=CHAR},
+      </if>
+      <if test="record.pclbmb != null">
+        PCLBMB = #{record.pclbmb,jdbcType=BLOB},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update XT_PC_LBPZB_MB
+    set PCLB_BM = #{record.pclbBm,jdbcType=CHAR},
+      PCLB_ZMC = #{record.pclbZmc,jdbcType=VARCHAR},
+      PCLB_CMC = #{record.pclbCmc,jdbcType=VARCHAR},
+      SFQY = #{record.sfqy,jdbcType=CHAR},
+      CJSJ = #{record.cjsj,jdbcType=TIMESTAMP},
+      PCLB_BZ = #{record.pclbBz,jdbcType=VARCHAR},
+      SX = #{record.sx,jdbcType=DECIMAL},
+      DWBM = #{record.dwbm,jdbcType=CHAR},
+      PC_FLBM = #{record.pcFlbm,jdbcType=CHAR},
+      PCLBMB = #{record.pclbmb,jdbcType=BLOB}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update XT_PC_LBPZB_MB
+    set PCLB_BM = #{record.pclbBm,jdbcType=CHAR},
+      PCLB_ZMC = #{record.pclbZmc,jdbcType=VARCHAR},
+      PCLB_CMC = #{record.pclbCmc,jdbcType=VARCHAR},
+      SFQY = #{record.sfqy,jdbcType=CHAR},
+      CJSJ = #{record.cjsj,jdbcType=TIMESTAMP},
+      PCLB_BZ = #{record.pclbBz,jdbcType=VARCHAR},
+      SX = #{record.sx,jdbcType=DECIMAL},
+      DWBM = #{record.dwbm,jdbcType=CHAR},
+      PC_FLBM = #{record.pcFlbm,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="swx.excel.domain.LBPZB_MB">
+    update XT_PC_LBPZB_MB
+    <set>
+      <if test="pclbZmc != null">
+        PCLB_ZMC = #{pclbZmc,jdbcType=VARCHAR},
+      </if>
+      <if test="pclbCmc != null">
+        PCLB_CMC = #{pclbCmc,jdbcType=VARCHAR},
+      </if>
+      <if test="sfqy != null">
+        SFQY = #{sfqy,jdbcType=CHAR},
+      </if>
+      <if test="cjsj != null">
+        CJSJ = #{cjsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pclbBz != null">
+        PCLB_BZ = #{pclbBz,jdbcType=VARCHAR},
+      </if>
+      <if test="sx != null">
+        SX = #{sx,jdbcType=DECIMAL},
+      </if>
+      <if test="dwbm != null">
+        DWBM = #{dwbm,jdbcType=CHAR},
+      </if>
+      <if test="pcFlbm != null">
+        PC_FLBM = #{pcFlbm,jdbcType=CHAR},
+      </if>
+      <if test="pclbmb != null">
+        PCLBMB = #{pclbmb,jdbcType=BLOB},
+      </if>
+    </set>
+    where PCLB_BM = #{pclbBm,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="swx.excel.domain.LBPZB_MB">
+    update XT_PC_LBPZB_MB
+    set PCLB_ZMC = #{pclbZmc,jdbcType=VARCHAR},
+      PCLB_CMC = #{pclbCmc,jdbcType=VARCHAR},
+      SFQY = #{sfqy,jdbcType=CHAR},
+      CJSJ = #{cjsj,jdbcType=TIMESTAMP},
+      PCLB_BZ = #{pclbBz,jdbcType=VARCHAR},
+      SX = #{sx,jdbcType=DECIMAL},
+      DWBM = #{dwbm,jdbcType=CHAR},
+      PC_FLBM = #{pcFlbm,jdbcType=CHAR},
+      PCLBMB = #{pclbmb,jdbcType=BLOB}
+    where PCLB_BM = #{pclbBm,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="swx.excel.domain.LBPZB_MB">
+    update XT_PC_LBPZB_MB
+    set PCLB_ZMC = #{pclbZmc,jdbcType=VARCHAR},
+      PCLB_CMC = #{pclbCmc,jdbcType=VARCHAR},
+      SFQY = #{sfqy,jdbcType=CHAR},
+      CJSJ = #{cjsj,jdbcType=TIMESTAMP},
+      PCLB_BZ = #{pclbBz,jdbcType=VARCHAR},
+      SX = #{sx,jdbcType=DECIMAL},
+      DWBM = #{dwbm,jdbcType=CHAR},
+      PC_FLBM = #{pcFlbm,jdbcType=CHAR}
+    where PCLB_BM = #{pclbBm,jdbcType=CHAR}
+  </update>
+</mapper>

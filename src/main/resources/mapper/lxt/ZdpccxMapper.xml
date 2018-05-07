@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="swx.excel.dao.lxt.ZdpccxMapper">
+  <resultMap id="BaseResultMap" type="swx.excel.domain.Zdpccx">
+    <id column="ZDPC_CXBM" jdbcType="CHAR" property="zdpcCxbm" />
+    <id column="DWBM" jdbcType="CHAR" property="dwbm" />
+    <result column="ZDPC_CXMC" jdbcType="VARCHAR" property="zdpcCxmc" />
+    <result column="ZDPC_CXSM" jdbcType="VARCHAR" property="zdpcCxsm" />
+    <result column="ZDPC_CXLX" jdbcType="CHAR" property="zdpcCxlx" />
+    <result column="ZDPC_CX" jdbcType="VARCHAR" property="zdpcCx" />
+    <result column="ZDPC_CXCS" jdbcType="VARCHAR" property="zdpcCxcs" />
+    <result column="FPZT_BH" jdbcType="CHAR" property="fpztBh" />
+    <result column="PCLB_BM" jdbcType="CHAR" property="pclbBm" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ZDPC_CXBM, DWBM, ZDPC_CXMC, ZDPC_CXSM, ZDPC_CXLX, ZDPC_CX, ZDPC_CXCS, FPZT_BH, PCLB_BM
+  </sql>
+  <select id="selectByExample" parameterType="swx.excel.domain.ZdpccxExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from XT_PC_ZDPCCX
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="swx.excel.domain.ZdpccxKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from XT_PC_ZDPCCX
+    where ZDPC_CXBM = #{zdpcCxbm,jdbcType=CHAR}
+      and DWBM = #{dwbm,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="swx.excel.domain.ZdpccxKey">
+    delete from XT_PC_ZDPCCX
+    where ZDPC_CXBM = #{zdpcCxbm,jdbcType=CHAR}
+      and DWBM = #{dwbm,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="swx.excel.domain.ZdpccxExample">
+    delete from XT_PC_ZDPCCX
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="swx.excel.domain.Zdpccx">
+    insert into XT_PC_ZDPCCX (ZDPC_CXBM, DWBM, ZDPC_CXMC, 
+      ZDPC_CXSM, ZDPC_CXLX, ZDPC_CX, 
+      ZDPC_CXCS, FPZT_BH, PCLB_BM)
+    values (#{zdpcCxbm,jdbcType=CHAR}, #{dwbm,jdbcType=CHAR}, #{zdpcCxmc,jdbcType=VARCHAR}, 
+      #{zdpcCxsm,jdbcType=VARCHAR}, #{zdpcCxlx,jdbcType=CHAR}, #{zdpcCx,jdbcType=VARCHAR}, 
+      #{zdpcCxcs,jdbcType=VARCHAR}, #{fpztBh,jdbcType=CHAR}, #{pclbBm,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="swx.excel.domain.Zdpccx">
+    insert into XT_PC_ZDPCCX
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="zdpcCxbm != null">
+        ZDPC_CXBM,
+      </if>
+      <if test="dwbm != null">
+        DWBM,
+      </if>
+      <if test="zdpcCxmc != null">
+        ZDPC_CXMC,
+      </if>
+      <if test="zdpcCxsm != null">
+        ZDPC_CXSM,
+      </if>
+      <if test="zdpcCxlx != null">
+        ZDPC_CXLX,
+      </if>
+      <if test="zdpcCx != null">
+        ZDPC_CX,
+      </if>
+      <if test="zdpcCxcs != null">
+        ZDPC_CXCS,
+      </if>
+      <if test="fpztBh != null">
+        FPZT_BH,
+      </if>
+      <if test="pclbBm != null">
+        PCLB_BM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="zdpcCxbm != null">
+        #{zdpcCxbm,jdbcType=CHAR},
+      </if>
+      <if test="dwbm != null">
+        #{dwbm,jdbcType=CHAR},
+      </if>
+      <if test="zdpcCxmc != null">
+        #{zdpcCxmc,jdbcType=VARCHAR},
+      </if>
+      <if test="zdpcCxsm != null">
+        #{zdpcCxsm,jdbcType=VARCHAR},
+      </if>
+      <if test="zdpcCxlx != null">
+        #{zdpcCxlx,jdbcType=CHAR},
+      </if>
+      <if test="zdpcCx != null">
+        #{zdpcCx,jdbcType=VARCHAR},
+      </if>
+      <if test="zdpcCxcs != null">
+        #{zdpcCxcs,jdbcType=VARCHAR},
+      </if>
+      <if test="fpztBh != null">
+        #{fpztBh,jdbcType=CHAR},
+      </if>
+      <if test="pclbBm != null">
+        #{pclbBm,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="swx.excel.domain.ZdpccxExample" resultType="java.lang.Long">
+    select count(*) from XT_PC_ZDPCCX
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update XT_PC_ZDPCCX
+    <set>
+      <if test="record.zdpcCxbm != null">
+        ZDPC_CXBM = #{record.zdpcCxbm,jdbcType=CHAR},
+      </if>
+      <if test="record.dwbm != null">
+        DWBM = #{record.dwbm,jdbcType=CHAR},
+      </if>
+      <if test="record.zdpcCxmc != null">
+        ZDPC_CXMC = #{record.zdpcCxmc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zdpcCxsm != null">
+        ZDPC_CXSM = #{record.zdpcCxsm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zdpcCxlx != null">
+        ZDPC_CXLX = #{record.zdpcCxlx,jdbcType=CHAR},
+      </if>
+      <if test="record.zdpcCx != null">
+        ZDPC_CX = #{record.zdpcCx,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zdpcCxcs != null">
+        ZDPC_CXCS = #{record.zdpcCxcs,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fpztBh != null">
+        FPZT_BH = #{record.fpztBh,jdbcType=CHAR},
+      </if>
+      <if test="record.pclbBm != null">
+        PCLB_BM = #{record.pclbBm,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update XT_PC_ZDPCCX
+    set ZDPC_CXBM = #{record.zdpcCxbm,jdbcType=CHAR},
+      DWBM = #{record.dwbm,jdbcType=CHAR},
+      ZDPC_CXMC = #{record.zdpcCxmc,jdbcType=VARCHAR},
+      ZDPC_CXSM = #{record.zdpcCxsm,jdbcType=VARCHAR},
+      ZDPC_CXLX = #{record.zdpcCxlx,jdbcType=CHAR},
+      ZDPC_CX = #{record.zdpcCx,jdbcType=VARCHAR},
+      ZDPC_CXCS = #{record.zdpcCxcs,jdbcType=VARCHAR},
+      FPZT_BH = #{record.fpztBh,jdbcType=CHAR},
+      PCLB_BM = #{record.pclbBm,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="swx.excel.domain.Zdpccx">
+    update XT_PC_ZDPCCX
+    <set>
+      <if test="zdpcCxmc != null">
+        ZDPC_CXMC = #{zdpcCxmc,jdbcType=VARCHAR},
+      </if>
+      <if test="zdpcCxsm != null">
+        ZDPC_CXSM = #{zdpcCxsm,jdbcType=VARCHAR},
+      </if>
+      <if test="zdpcCxlx != null">
+        ZDPC_CXLX = #{zdpcCxlx,jdbcType=CHAR},
+      </if>
+      <if test="zdpcCx != null">
+        ZDPC_CX = #{zdpcCx,jdbcType=VARCHAR},
+      </if>
+      <if test="zdpcCxcs != null">
+        ZDPC_CXCS = #{zdpcCxcs,jdbcType=VARCHAR},
+      </if>
+      <if test="fpztBh != null">
+        FPZT_BH = #{fpztBh,jdbcType=CHAR},
+      </if>
+      <if test="pclbBm != null">
+        PCLB_BM = #{pclbBm,jdbcType=CHAR},
+      </if>
+    </set>
+    where ZDPC_CXBM = #{zdpcCxbm,jdbcType=CHAR}
+      and DWBM = #{dwbm,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="swx.excel.domain.Zdpccx">
+    update XT_PC_ZDPCCX
+    set ZDPC_CXMC = #{zdpcCxmc,jdbcType=VARCHAR},
+      ZDPC_CXSM = #{zdpcCxsm,jdbcType=VARCHAR},
+      ZDPC_CXLX = #{zdpcCxlx,jdbcType=CHAR},
+      ZDPC_CX = #{zdpcCx,jdbcType=VARCHAR},
+      ZDPC_CXCS = #{zdpcCxcs,jdbcType=VARCHAR},
+      FPZT_BH = #{fpztBh,jdbcType=CHAR},
+      PCLB_BM = #{pclbBm,jdbcType=CHAR}
+    where ZDPC_CXBM = #{zdpcCxbm,jdbcType=CHAR}
+      and DWBM = #{dwbm,jdbcType=CHAR}
+  </update>
+</mapper>

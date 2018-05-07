@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="swx.excel.dao.xxt.AjPcxflMapper">
+  <resultMap id="BaseResultMap" type="swx.excel.domain.AjpcPcxfl">
+    <id column="PCXFLBM" jdbcType="CHAR" property="pcxflbm" />
+    <result column="PCXFLMC" jdbcType="VARCHAR" property="pcxflmc" />
+    <result column="PCXFLFBM" jdbcType="CHAR" property="pcxflfbm" />
+    <result column="PCMBBM" jdbcType="CHAR" property="pcmbbm" />
+    <result column="PCJLBM" jdbcType="CHAR" property="pcjlbm" />
+    <result column="XH" jdbcType="DECIMAL" property="xh" />
+    <result column="SFTJ" jdbcType="CHAR" property="sftj" />
+    <result column="SM" jdbcType="VARCHAR" property="sm" />
+    <result column="MRZ" jdbcType="VARCHAR" property="mrz" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PCXFLBM, PCXFLMC, PCXFLFBM, PCMBBM, PCJLBM, XH, SFTJ, SM, MRZ
+  </sql>
+  <select id="selectByExample" parameterType="swx.excel.domain.AjpcPcxflExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from XT_PC_PCXFL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from XT_PC_PCXFL
+    where PCXFLBM = #{pcxflbm,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from XT_PC_PCXFL
+    where PCXFLBM = #{pcxflbm,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="swx.excel.domain.AjpcPcxflExample">
+    delete from XT_PC_PCXFL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="swx.excel.domain.AjpcPcxfl">
+    insert into XT_PC_PCXFL (PCXFLBM, PCXFLMC, PCXFLFBM, 
+      PCMBBM, PCJLBM, XH, SFTJ, 
+      SM, MRZ)
+    values (#{pcxflbm,jdbcType=CHAR}, #{pcxflmc,jdbcType=VARCHAR}, #{pcxflfbm,jdbcType=CHAR}, 
+      #{pcmbbm,jdbcType=CHAR}, #{pcjlbm,jdbcType=CHAR}, #{xh,jdbcType=DECIMAL}, #{sftj,jdbcType=CHAR}, 
+      #{sm,jdbcType=VARCHAR}, #{mrz,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="swx.excel.domain.AjpcPcxfl">
+    insert into XT_PC_PCXFL
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pcxflbm != null">
+        PCXFLBM,
+      </if>
+      <if test="pcxflmc != null">
+        PCXFLMC,
+      </if>
+      <if test="pcxflfbm != null">
+        PCXFLFBM,
+      </if>
+      <if test="pcmbbm != null">
+        PCMBBM,
+      </if>
+      <if test="pcjlbm != null">
+        PCJLBM,
+      </if>
+      <if test="xh != null">
+        XH,
+      </if>
+      <if test="sftj != null">
+        SFTJ,
+      </if>
+      <if test="sm != null">
+        SM,
+      </if>
+      <if test="mrz != null">
+        MRZ,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pcxflbm != null">
+        #{pcxflbm,jdbcType=CHAR},
+      </if>
+      <if test="pcxflmc != null">
+        #{pcxflmc,jdbcType=VARCHAR},
+      </if>
+      <if test="pcxflfbm != null">
+        #{pcxflfbm,jdbcType=CHAR},
+      </if>
+      <if test="pcmbbm != null">
+        #{pcmbbm,jdbcType=CHAR},
+      </if>
+      <if test="pcjlbm != null">
+        #{pcjlbm,jdbcType=CHAR},
+      </if>
+      <if test="xh != null">
+        #{xh,jdbcType=DECIMAL},
+      </if>
+      <if test="sftj != null">
+        #{sftj,jdbcType=CHAR},
+      </if>
+      <if test="sm != null">
+        #{sm,jdbcType=VARCHAR},
+      </if>
+      <if test="mrz != null">
+        #{mrz,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="swx.excel.domain.AjpcPcxflExample" resultType="java.lang.Long">
+    select count(*) from XT_PC_PCXFL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update XT_PC_PCXFL
+    <set>
+      <if test="record.pcxflbm != null">
+        PCXFLBM = #{record.pcxflbm,jdbcType=CHAR},
+      </if>
+      <if test="record.pcxflmc != null">
+        PCXFLMC = #{record.pcxflmc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pcxflfbm != null">
+        PCXFLFBM = #{record.pcxflfbm,jdbcType=CHAR},
+      </if>
+      <if test="record.pcmbbm != null">
+        PCMBBM = #{record.pcmbbm,jdbcType=CHAR},
+      </if>
+      <if test="record.pcjlbm != null">
+        PCJLBM = #{record.pcjlbm,jdbcType=CHAR},
+      </if>
+      <if test="record.xh != null">
+        XH = #{record.xh,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sftj != null">
+        SFTJ = #{record.sftj,jdbcType=CHAR},
+      </if>
+      <if test="record.sm != null">
+        SM = #{record.sm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mrz != null">
+        MRZ = #{record.mrz,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update XT_PC_PCXFL
+    set PCXFLBM = #{record.pcxflbm,jdbcType=CHAR},
+      PCXFLMC = #{record.pcxflmc,jdbcType=VARCHAR},
+      PCXFLFBM = #{record.pcxflfbm,jdbcType=CHAR},
+      PCMBBM = #{record.pcmbbm,jdbcType=CHAR},
+      PCJLBM = #{record.pcjlbm,jdbcType=CHAR},
+      XH = #{record.xh,jdbcType=DECIMAL},
+      SFTJ = #{record.sftj,jdbcType=CHAR},
+      SM = #{record.sm,jdbcType=VARCHAR},
+      MRZ = #{record.mrz,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="swx.excel.domain.AjpcPcxfl">
+    update XT_PC_PCXFL
+    <set>
+      <if test="pcxflmc != null">
+        PCXFLMC = #{pcxflmc,jdbcType=VARCHAR},
+      </if>
+      <if test="pcxflfbm != null">
+        PCXFLFBM = #{pcxflfbm,jdbcType=CHAR},
+      </if>
+      <if test="pcmbbm != null">
+        PCMBBM = #{pcmbbm,jdbcType=CHAR},
+      </if>
+      <if test="pcjlbm != null">
+        PCJLBM = #{pcjlbm,jdbcType=CHAR},
+      </if>
+      <if test="xh != null">
+        XH = #{xh,jdbcType=DECIMAL},
+      </if>
+      <if test="sftj != null">
+        SFTJ = #{sftj,jdbcType=CHAR},
+      </if>
+      <if test="sm != null">
+        SM = #{sm,jdbcType=VARCHAR},
+      </if>
+      <if test="mrz != null">
+        MRZ = #{mrz,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PCXFLBM = #{pcxflbm,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="swx.excel.domain.AjpcPcxfl">
+    update XT_PC_PCXFL
+    set PCXFLMC = #{pcxflmc,jdbcType=VARCHAR},
+      PCXFLFBM = #{pcxflfbm,jdbcType=CHAR},
+      PCMBBM = #{pcmbbm,jdbcType=CHAR},
+      PCJLBM = #{pcjlbm,jdbcType=CHAR},
+      XH = #{xh,jdbcType=DECIMAL},
+      SFTJ = #{sftj,jdbcType=CHAR},
+      SM = #{sm,jdbcType=VARCHAR},
+      MRZ = #{mrz,jdbcType=VARCHAR}
+    where PCXFLBM = #{pcxflbm,jdbcType=CHAR}
+  </update>
+</mapper>

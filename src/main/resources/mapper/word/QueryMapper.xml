@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="swx.excel.dao.word.QueryMapper">
+
+
+     <select id="getTables" resultType="string">
+       SELECT TABLE_NAME FROM all_tables where owner=#{user}
+     </select>
+
+      <select id="getWordList" resultType="swx.excel.pojo.WordDto">
+
+        select t.table_name 表名,
+          t.column_name as columnName,
+          t.data_type as columnType,
+          t.data_length as columnLength,
+          t.nullable as sfwk,
+          /*t.data_default as defaultValue,*/
+          c.comments as bz
+        from ALL_TAB_COLUMNS t INNER JOIN ALL_col_comments c ON t.TABLE_NAME=c.TABLE_NAME
+        where t.TABLE_NAME =#{tableName}
+        AND
+        T.OWNER=#{user}
+
+      </select>
+
+        <select id="getColumns" resultType="swx.excel.pojo.WordDto">
+          SELECT  t.column_name as columnName,
+                  t.data_type as columnType,
+                  t.data_length as columnLength,
+                  t.nullable as sfwk
+           FROM ALL_TAB_COLUMNS t  where TABLE_NAME=#{tableName} ORDER BY COLUMN_NAME ASC
+        </select>
+        <select id="getColumnsbz" resultType="string">
+
+            SELECT  c.comments as bz FROM ALL_col_comments c where TABLE_NAME=#{tableName} ORDER BY COLUMN_NAME ASC
+
+        </select>
+</mapper>

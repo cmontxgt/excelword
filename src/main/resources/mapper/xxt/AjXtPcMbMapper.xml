@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="swx.excel.dao.xxt.AjXtPcMbMapper">
+  <resultMap id="BaseResultMap" type="swx.excel.domain.AjXtPcMb">
+    <id column="PCMBBM" jdbcType="CHAR" property="pcmbbm" />
+    <result column="PCMBMC" jdbcType="VARCHAR" property="pcmbmc" />
+    <result column="DWBM" jdbcType="CHAR" property="dwbm" />
+    <result column="PCFLBM" jdbcType="CHAR" property="pcflbm" />
+    <result column="SFQY" jdbcType="CHAR" property="sfqy" />
+    <result column="CJSJ" jdbcType="TIMESTAMP" property="cjsj" />
+    <result column="XH" jdbcType="DECIMAL" property="xh" />
+    <result column="SM" jdbcType="VARCHAR" property="sm" />
+    <result column="PCMBLX" jdbcType="CHAR" property="pcmblx" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="swx.excel.domain.AjXtPcMb">
+    <result column="PCMBNR" jdbcType="BLOB" property="pcmbnr" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PCMBBM, PCMBMC, DWBM, PCFLBM, SFQY, CJSJ, XH, SM, PCMBLX
+  </sql>
+  <sql id="Blob_Column_List">
+    PCMBNR
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="swx.excel.domain.AjXtPcMbExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from XT_PC_MB
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="swx.excel.domain.AjXtPcMbExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from XT_PC_MB
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from XT_PC_MB
+    where PCMBBM = #{pcmbbm,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from XT_PC_MB
+    where PCMBBM = #{pcmbbm,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="swx.excel.domain.AjXtPcMbExample">
+    delete from XT_PC_MB
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="swx.excel.domain.AjXtPcMb">
+    insert into XT_PC_MB (PCMBBM, PCMBMC, DWBM, 
+      PCFLBM, SFQY, CJSJ, XH, 
+      SM, PCMBLX, PCMBNR)
+    values (#{pcmbbm,jdbcType=CHAR}, #{pcmbmc,jdbcType=VARCHAR}, #{dwbm,jdbcType=CHAR}, 
+      #{pcflbm,jdbcType=CHAR}, #{sfqy,jdbcType=CHAR}, #{cjsj,jdbcType=TIMESTAMP}, #{xh,jdbcType=DECIMAL}, 
+      #{sm,jdbcType=VARCHAR}, #{pcmblx,jdbcType=CHAR}, #{pcmbnr,jdbcType=BLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="swx.excel.domain.AjXtPcMb">
+    insert into XT_PC_MB
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pcmbbm != null">
+        PCMBBM,
+      </if>
+      <if test="pcmbmc != null">
+        PCMBMC,
+      </if>
+      <if test="dwbm != null">
+        DWBM,
+      </if>
+      <if test="pcflbm != null">
+        PCFLBM,
+      </if>
+      <if test="sfqy != null">
+        SFQY,
+      </if>
+      <if test="cjsj != null">
+        CJSJ,
+      </if>
+      <if test="xh != null">
+        XH,
+      </if>
+      <if test="sm != null">
+        SM,
+      </if>
+      <if test="pcmblx != null">
+        PCMBLX,
+      </if>
+      <if test="pcmbnr != null">
+        PCMBNR,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pcmbbm != null">
+        #{pcmbbm,jdbcType=CHAR},
+      </if>
+      <if test="pcmbmc != null">
+        #{pcmbmc,jdbcType=VARCHAR},
+      </if>
+      <if test="dwbm != null">
+        #{dwbm,jdbcType=CHAR},
+      </if>
+      <if test="pcflbm != null">
+        #{pcflbm,jdbcType=CHAR},
+      </if>
+      <if test="sfqy != null">
+        #{sfqy,jdbcType=CHAR},
+      </if>
+      <if test="cjsj != null">
+        #{cjsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="xh != null">
+        #{xh,jdbcType=DECIMAL},
+      </if>
+      <if test="sm != null">
+        #{sm,jdbcType=VARCHAR},
+      </if>
+      <if test="pcmblx != null">
+        #{pcmblx,jdbcType=CHAR},
+      </if>
+      <if test="pcmbnr != null">
+        #{pcmbnr,jdbcType=BLOB},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="swx.excel.domain.AjXtPcMbExample" resultType="java.lang.Long">
+    select count(*) from XT_PC_MB
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update XT_PC_MB
+    <set>
+      <if test="record.pcmbbm != null">
+        PCMBBM = #{record.pcmbbm,jdbcType=CHAR},
+      </if>
+      <if test="record.pcmbmc != null">
+        PCMBMC = #{record.pcmbmc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dwbm != null">
+        DWBM = #{record.dwbm,jdbcType=CHAR},
+      </if>
+      <if test="record.pcflbm != null">
+        PCFLBM = #{record.pcflbm,jdbcType=CHAR},
+      </if>
+      <if test="record.sfqy != null">
+        SFQY = #{record.sfqy,jdbcType=CHAR},
+      </if>
+      <if test="record.cjsj != null">
+        CJSJ = #{record.cjsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.xh != null">
+        XH = #{record.xh,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sm != null">
+        SM = #{record.sm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pcmblx != null">
+        PCMBLX = #{record.pcmblx,jdbcType=CHAR},
+      </if>
+      <if test="record.pcmbnr != null">
+        PCMBNR = #{record.pcmbnr,jdbcType=BLOB},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update XT_PC_MB
+    set PCMBBM = #{record.pcmbbm,jdbcType=CHAR},
+      PCMBMC = #{record.pcmbmc,jdbcType=VARCHAR},
+      DWBM = #{record.dwbm,jdbcType=CHAR},
+      PCFLBM = #{record.pcflbm,jdbcType=CHAR},
+      SFQY = #{record.sfqy,jdbcType=CHAR},
+      CJSJ = #{record.cjsj,jdbcType=TIMESTAMP},
+      XH = #{record.xh,jdbcType=DECIMAL},
+      SM = #{record.sm,jdbcType=VARCHAR},
+      PCMBLX = #{record.pcmblx,jdbcType=CHAR},
+      PCMBNR = #{record.pcmbnr,jdbcType=BLOB}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update XT_PC_MB
+    set PCMBBM = #{record.pcmbbm,jdbcType=CHAR},
+      PCMBMC = #{record.pcmbmc,jdbcType=VARCHAR},
+      DWBM = #{record.dwbm,jdbcType=CHAR},
+      PCFLBM = #{record.pcflbm,jdbcType=CHAR},
+      SFQY = #{record.sfqy,jdbcType=CHAR},
+      CJSJ = #{record.cjsj,jdbcType=TIMESTAMP},
+      XH = #{record.xh,jdbcType=DECIMAL},
+      SM = #{record.sm,jdbcType=VARCHAR},
+      PCMBLX = #{record.pcmblx,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="swx.excel.domain.AjXtPcMb">
+    update XT_PC_MB
+    <set>
+      <if test="pcmbmc != null">
+        PCMBMC = #{pcmbmc,jdbcType=VARCHAR},
+      </if>
+      <if test="dwbm != null">
+        DWBM = #{dwbm,jdbcType=CHAR},
+      </if>
+      <if test="pcflbm != null">
+        PCFLBM = #{pcflbm,jdbcType=CHAR},
+      </if>
+      <if test="sfqy != null">
+        SFQY = #{sfqy,jdbcType=CHAR},
+      </if>
+      <if test="cjsj != null">
+        CJSJ = #{cjsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="xh != null">
+        XH = #{xh,jdbcType=DECIMAL},
+      </if>
+      <if test="sm != null">
+        SM = #{sm,jdbcType=VARCHAR},
+      </if>
+      <if test="pcmblx != null">
+        PCMBLX = #{pcmblx,jdbcType=CHAR},
+      </if>
+      <if test="pcmbnr != null">
+        PCMBNR = #{pcmbnr,jdbcType=BLOB},
+      </if>
+    </set>
+    where PCMBBM = #{pcmbbm,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="swx.excel.domain.AjXtPcMb">
+    update XT_PC_MB
+    set PCMBMC = #{pcmbmc,jdbcType=VARCHAR},
+      DWBM = #{dwbm,jdbcType=CHAR},
+      PCFLBM = #{pcflbm,jdbcType=CHAR},
+      SFQY = #{sfqy,jdbcType=CHAR},
+      CJSJ = #{cjsj,jdbcType=TIMESTAMP},
+      XH = #{xh,jdbcType=DECIMAL},
+      SM = #{sm,jdbcType=VARCHAR},
+      PCMBLX = #{pcmblx,jdbcType=CHAR},
+      PCMBNR = #{pcmbnr,jdbcType=BLOB}
+    where PCMBBM = #{pcmbbm,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="swx.excel.domain.AjXtPcMb">
+    update XT_PC_MB
+    set PCMBMC = #{pcmbmc,jdbcType=VARCHAR},
+      DWBM = #{dwbm,jdbcType=CHAR},
+      PCFLBM = #{pcflbm,jdbcType=CHAR},
+      SFQY = #{sfqy,jdbcType=CHAR},
+      CJSJ = #{cjsj,jdbcType=TIMESTAMP},
+      XH = #{xh,jdbcType=DECIMAL},
+      SM = #{sm,jdbcType=VARCHAR},
+      PCMBLX = #{pcmblx,jdbcType=CHAR}
+    where PCMBBM = #{pcmbbm,jdbcType=CHAR}
+  </update>
+</mapper>
