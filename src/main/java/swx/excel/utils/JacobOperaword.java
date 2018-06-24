@@ -970,4 +970,32 @@ public class JacobOperaword {
 
         Dispatch.put(view, "SeekView", new Variant(0)); // wdSeekMainDocument-0恢复视图;
     }
+
+
+    /***************************************************************************
+     * 根据书签插入数据
+     *
+     * @param bookMarkKey 书签名
+     * @param info  插入的数据
+     * @return
+     */
+
+    public boolean intoValueBookMark(String bookMarkKey, String info) throws Exception{
+
+        Dispatch activeDocument = word.getProperty("ActiveDocument")
+                .toDispatch();
+        Dispatch bookMarks = word.call(activeDocument, "Bookmarks")
+                .toDispatch();
+        boolean bookMarkExist = word.call(bookMarks, "Exists", bookMarkKey)
+                .toBoolean();
+        if (bookMarkExist) {
+
+            Dispatch rangeItem = Dispatch.call(bookMarks, "Item", bookMarkKey)
+                    .toDispatch();
+            Dispatch range = Dispatch.call(rangeItem, "Range").toDispatch();
+            Dispatch.put(range, "Text", new Variant(info));
+            return true;
+        }
+        return false;
+    }
 }
