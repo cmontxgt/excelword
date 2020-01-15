@@ -1,0 +1,10 @@
+    Downloads curl -XPUT 'http://localhost:9200/bank/_mapping/account' -d '
+         {
+              "properties": {
+                         "state": {
+                                 "type": "text",
+                                        "fielddata": true
+                             }
+               }
+            }'
+# bank是index、account是类型、state是你需要设置的text字段
